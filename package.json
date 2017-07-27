@@ -1,0 +1,56 @@
+{
+  "name": "mapnik-mysql-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha ./dist/ --recursive",
+    "start": "node dist/example/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipv4sec/mapnik-mysql-ts.git"
+  },
+  "author": "ipv4sec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipv4sec/mapnik-mysql-ts/issues"
+  },
+  "homepage": "https://github.com/ipv4sec/mapnik-mysql-ts#readme",
+  "dependencies": {
+    "@types/assert": "0.0.31",
+    "@types/body-parser": "^1.16.4",
+    "@types/connect-timeout": "0.0.31",
+    "@types/cors": "^2.8.1",
+    "@types/express": "^4.0.36",
+    "@types/log4js": "0.0.32",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.7",
+    "@types/proj4": "^2.3.4",
+    "assert": "^1.4.1",
+    "batch-request": "^0.1.4",
+    "body-parser": "^1.17.2",
+    "connect-timeout": "^1.9.0",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-core-ts": "github:ipv4sec/express-core-ts",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-tslint": "^8.1.1",
+    "gulp-typescript": "^3.1.7",
+    "log4js": "^1.1.1",
+    "merge2": "^1.1.0",
+    "mocha": "^3.4.2",
+    "mysql": "^2.13.0",
+    "proj4": "^2.4.3",
+    "promise-mysql": "^3.0.2",
+    "tslint": "^5.4.3",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.42",
+    "@types/mysql": "0.0.34"
+  }
+}

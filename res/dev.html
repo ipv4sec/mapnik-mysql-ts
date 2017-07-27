@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div id='map'></div>
+<script>
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: {
+      "version": 8,
+      "name": "Mapbox Streets",
+      "sources": {},
+      "layers": []
+    },
+    hash: 'true',
+    zoom: 11.81,
+    center: [120.1128,43.9405]
+  });
+
+  map.on('load', function () {
+    addGoogleLayer();
+    addVectorLayer();
+    map.on('click', function (e) {
+      var features = map.queryRenderedFeatures(e.point, {
+        layers: ['tile']
+      });
+      if (features.length) console.log(features[0])
+    })
+
+  });
+
+  function addVectorLayer() {
+    map.addSource('sourceName', {
+      type: 'vector',
+      tiles: [
+        "http://127.0.0.1:3000/map/service/v1/{z}/{x}/{y}"
+      ],
+      minzoom: 1,
+      maxzoom: 20
+    });
+
+    map.addLayer({
+      "id": "tile",
+      "type": "fill",
+      "source": "sourceName",
+      "source-layer": "anivia",
+      "layout": {
+      },
+      "paint": {
+        "fill-color": "#ff69b4",
+        "fill-outline-color": "blue",
+        "fill-opacity":0.5
+      }
+    });
+  }
+  function addGoogleLayer() {
+    map.addSource('google', {
+      type: 'raster',
+      tiles: [
+//                "http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}" // 有偏底图
+        "http://khm0.google.com/kh/v=718&hl=en&x={x}&y={y}&z={z}&s=Gali"  // 无偏
+      ],
+      "tileSize": 256,
+      minzoom: 1,
+      maxzoom: 20
+    });
+    map.addLayer({
+      "source": "google",
+      type: 'raster',
+      id: "googletile"
+    })
+  }
+</script>
+</body>
+
+</html>
