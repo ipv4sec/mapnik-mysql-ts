@@ -11,7 +11,6 @@ interface MapOptions {
     layer: string;
     geom: string;
     fields: string[];
-    srid: number;
 }
 declare class MapService {
     mysqlPool: mysql.IPool;
@@ -20,7 +19,6 @@ declare class MapService {
     private layer;
     private geom;
     private fields;
-    private srid;
     initMysql(mysqlOption: MysqlOptions): MapService;
     initMap(serviceOption: MapOptions): void;
     start(): Promise<void>;
