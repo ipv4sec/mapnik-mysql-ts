@@ -71,8 +71,16 @@ mapService.start()
 let pbf: Buffer = await mapService.getTile(Number(req.params.z),Number(req.params.x),Number(req.params.y))
 ```
 
+4,实例
 
-[Express Example Code](src/example/app.ts)
+[Express实例源码](src/example/app.ts)
+
+```bash
+gulp build
+npm start
+```
+浏览器访问 `http://127.0.0.1:3000/dev.html`
+
 
 
 ### lint
