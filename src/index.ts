@@ -42,6 +42,8 @@ class MapService {
     // // GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]
     // let srtext: string = result[0]['srtext']
     // 根据数据库里面的srid转换为
+
+    mapnik.register_datasource((path.join(mapnik.settings.paths.input_plugins, 'geojson.input')))
   }
   public async getTile (z: number, x: number , y: number ): Promise<Buffer> {
     let vt: any = new mapnik.VectorTile(z, x, y)
@@ -81,7 +83,7 @@ class MapService {
     }
     // 现在使用mapnik转换pbf
     return new Promise<Buffer>((resolve, reject) => {
-      mapnik.register_datasource((path.join(mapnik.settings.paths.input_plugins, 'geojson.input')))
+
       let vt: any = new mapnik.VectorTile(z, x, y)
       vt.addGeoJSON(JSON.stringify(featureCollection), this.layer , {})
       vt.toGeoJSONSync(0)
