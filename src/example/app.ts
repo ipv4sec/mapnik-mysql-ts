@@ -4,10 +4,10 @@ import { app , express } from 'express-core-ts'
 
 let mapService: MapService = new MapService()
 let mysqlOptions: MysqlOptions = {
-  host: 'localhost',
-  user: 'root',
-  password: 'passwd',
-  database: 'mapnik'
+  host: process.env.MYSQL_HOST || 'localhost',
+  user: process.env.MYSQL_USERNAME || 'root',
+  password: process.env.MYSQL_PASSWORD || 'passwd',
+  database: process.env.MYSQL_DATABASE_NAME || 'mapnik'
 }
 let mapOptions: MapOptions = {
   table: 'land',
@@ -21,13 +21,13 @@ mapService.start()
 
 app.use(express.static('res'))
 app.use('/map/service/v1/:z/:x/:y' , async function (req,res) {
-  let pbf: any
   try {
-    pbf = await mapService.getTile(Number(req.params.z),Number(req.params.x),Number(req.params.y))
+    let pbf: Buffer = await mapService.getTile(Number(req.params.z),Number(req.params.x),Number(req.params.y))
+    res.end(pbf)
   } catch (err) {
-    pbf = new Buffer('')
+    res.sendStatus(204)
   }
-  res.end(pbf)
+
 })
 app.listen(3000)
 
